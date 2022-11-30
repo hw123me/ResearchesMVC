@@ -1,0 +1,254 @@
+﻿@model ResearchesMVC.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>تفاصيل الطلب</h3>
+
+<div>
+
+    <hr />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" colspan=4>رقم الطلب</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row" colspan=4> @Html.DisplayFor(model => model.Id)</th>
+
+            </tr>
+            <tr>
+                <th scope="col">اسم الباحث</th>
+                <th scope="col">الجامعة </th>
+                <th scope="col">المدينة </th>
+                <th scope="col">الكلية</th>
+            </tr>
+            <tr>
+                <td> @Html.DisplayFor(model => model.User.FullName)</td>
+                <td> @Html.DisplayFor(model => model.Uneviersity)</td>
+                <td> @Html.DisplayFor(model => model.City_Univ)</td>
+                <td> @Html.DisplayFor(model => model.College)</td>
+            </tr>
+            <tr>
+
+                <th scope="col">القسم </th>
+                <th scope="col">التخصص </th>
+                <th scope="col">عنوان الدراسة </th>
+                <th scope="col">الغرض من الدراسة</th>
+            </tr>
+            <tr>
+
+                <td> @Html.DisplayFor(model => model.Section)</td>
+                <td> @Html.DisplayFor(model => model.Specialize)</td>
+                <td> @Html.DisplayFor(model => model.StudyTitle)</td>
+                <td> @Html.DisplayFor(model => model.Goal)</td>
+            </tr>
+            <tr>
+                <th scope="col">المرفقات </th>
+                <th scope="col">المرحلة الدراسية </th>
+                <th scope="col"> العام الدراسي </th>
+                <th scope="col"> الفصل الدراسي </th>
+            </tr>
+            <tr>
+                <td>
+                     <a asp-action="Download"
+			   asp-route-filename="@Model.ToolsPdfUrl">
+				@Model.ToolsPdfUrl </a>
+                    @*@Html.DisplayFor(model => model.ToolsPdfUrl)*@
+                    </td>
+                <td> @Html.DisplayFor(model => model.School_Type)</td>
+                <td> @Html.DisplayFor(model => model.Term_Year)</td>
+                <td> @Html.DisplayFor(model => model.Term)</td>
+            </tr>
+            <tr>
+                <th scope="col">حالة الطلب </th>
+                <th scope="col"> تاريخ الطلب </th>
+                <th scope="col" colspan=2> ملاحظات  </th>
+                
+            </tr>
+            <tr>
+                <td> @Html.DisplayFor(model => model.Status.Name)</td>
+                <td> @Html.DisplayFor(model => model.CreatedOn)</td>
+                <td colspan=2> @Html.DisplayFor(model => model.Notes)</td>
+               
+            </tr>
+        </tbody>
+    </table>
+ @*   <dl class="row">
+        @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.FullName)
+            </dd>
+            <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Uneviersity)
+            </dt>
+            <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Uneviersity)
+            </dd>*@
+       @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City_Univ)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City_Univ)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.College)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.College)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Specialize)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Specialize)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StudyTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StudyTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Goal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Goal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ToolsPdfUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ToolsPdfUrl)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.School_Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.School_Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Term_Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Term_Year)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Term)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Term)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status.Name)
+        </dd>
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Active)
+      @*      </dd>*@
+       @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+</div>*@
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">أدوات الدراسة</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+            }
+            @foreach (var item in Model.Tools)
+            {
+                <tr>
+                    <th scope="row" class=text-secondary>@i</th>
+                    <td class=text-secondary>@item.StudyTool.ToolName  </td>
+                </tr>
+                i += 1;
+            }
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">عينة الدراسة</th>
+            </tr>
+              @{
+                int c = 1;
+            }
+            @foreach (var item in Model.Samples)
+            {
+                <tr>
+                    <th scope="row" class=text-secondary>@c</th>
+                    <td class=text-secondary>@item.StudySample.SampleName </td>
+
+                </tr>
+                c += 1;
+            }
+        </tbody>
+    </table>
+</div>
+@*<div class="col-4">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">عينة الدراسة</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int c = 1;
+            }
+            @foreach (var item in Model.Samples)
+            {
+                <tr>
+                    <th scope="row">@c</th>
+                    <td>@item.StudySample.SampleName </td>
+
+                </tr>
+                c += 1;
+            }
+        </tbody>
+    </table>
+</div>*@
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |*@
+    <a asp-action="Index">عودة للقائمة الرئيسية</a>
+</div>

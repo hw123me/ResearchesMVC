@@ -1,0 +1,128 @@
+﻿@model ResearchesMVC.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            @* <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="Uneviersity" />
+            @*<div class="form-group">
+                <label asp-for="Uneviersity" class="control-label"></label>
+                <input asp-for="Uneviersity" class="form-control" />
+                <span asp-validation-for="Uneviersity" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="City_Univ" />
+            @* <div class="form-group">
+                <label asp-for="City_Univ" class="control-label"></label>
+                <input asp-for="City_Univ" class="form-control" />
+                <span asp-validation-for="City_Univ" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="College" />
+            @* <div class="form-group">
+                <label asp-for="College" class="control-label"></label>
+                <input asp-for="College" class="form-control" />
+                <span asp-validation-for="College" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="Section" />
+            @* <div class="form-group">
+                <label asp-for="Section" class="control-label"></label>
+                <input asp-for="Section" class="form-control" />
+                <span asp-validation-for="Section" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="Specialize" />
+            @* <div class="form-group">
+                <label asp-for="Specialize" class="control-label"></label>
+                <input asp-for="Specialize" class="form-control" />
+                <span asp-validation-for="Specialize" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="StudyTitle" />
+            @* <div class="form-group">
+                <label asp-for="StudyTitle" class="control-label"></label>
+                <input asp-for="StudyTitle" class="form-control" />
+                <span asp-validation-for="StudyTitle" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="Goal" />
+            @*<div class="form-group">
+                <label asp-for="Goal" class="control-label"></label>
+                <input asp-for="Goal" class="form-control" />
+                <span asp-validation-for="Goal" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="ToolsPdfUrl" />
+            @*<div class="form-group">
+                <label asp-for="ToolsPdfUrl" class="control-label"></label>
+                <input asp-for="ToolsPdfUrl" class="form-control" />
+                <span asp-validation-for="ToolsPdfUrl" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="School_Type" />
+            @*<div class="form-group">
+                <label asp-for="School_Type" class="control-label"></label>
+                <input asp-for="School_Type" class="form-control" />
+                <span asp-validation-for="School_Type" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="Term_Year" />
+            @* <div class="form-group">
+                <label asp-for="Term_Year" class="control-label"></label>
+                <input asp-for="Term_Year" class="form-control" />
+                <span asp-validation-for="Term_Year" class="text-danger"></span>
+                </div>*@
+            <input type="hidden" asp-for="Term" />
+            @* <div class="form-group">
+                <label asp-for="Term" class="control-label"></label>
+                <input asp-for="Term" class="form-control" />
+                <span asp-validation-for="Term" class="text-danger"></span>
+                </div>*@
+
+            <div class="form-group">
+                <label asp-for="StatusId" class="control-label"></label>
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                <span asp-validation-for="StatusId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Active" />
+            @* <div class="form-group">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <textarea asp-for="Notes" rows=5 class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="CreatedOn" />
+            @* <div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+                </div>*@
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

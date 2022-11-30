@@ -1,0 +1,122 @@
+﻿@model IEnumerable<ResearchesMVC.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+ @if (TempData["success"] != null)
+    {
+         <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/js/toastr.min.js"></script>
+        <script>
+             var options = {
+            "positionClass": "toast-top-full-width",
+            "rtl":true,
+            }
+                  
+                    toastr.success('@TempData["success"]',{timeOut: 5000},options);
+        </script>
+    }
+<p>
+    <a asp-action="Create" class="btn btn-primary">طلب جديد </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>
+                @Html.DisplayNameFor(model => model.User)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.College)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specialize)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.StudyTitle)
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.ToolsPdfUrl)
+            </th>*@
+             <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusId)
+            </th>
+
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.User.FullName)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+               @* <td>
+                    @Html.DisplayFor(modelItem => item.College)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialize)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudyTitle)
+                </td>
+
+                @*<td>*@
+                    @*@Html.DisplayFor(modelItem => item.ToolsPdfUrl)*@
+                   @* <a asp-action="Download"
+                   asp-route-filename="@item.ToolsPdfUrl">
+                        @item.ToolsPdfUrl
+                    </a>
+                </td>*@
+                 <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                      @if (item.StatusId == 3)
+                    {
+                        <span class="text-danger"> @Html.DisplayFor(modelItem => item.Status.Name)</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    }
+                </td>
+                <td>
+                    @if (item.StatusId == 4)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">تعديل</a>
+                    }
+                    @if (item.StatusId == 5)
+                    {
+                        <a asp-action="ViewReport" asp-route-id="@item.Id">طباعة الطلب</a>
+                    }
+
+                
+                    @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                </td>
+                <td>
+                    @if (item.StatusId == 3)
+                    {
+                       <span class="text-danger">@Html.DisplayFor(modelItem => item.Notes)</span> 
+                    }
+                </td>
+               <td>
+                       <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a> 
+               </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,144 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+
+    //#7
+    //    var roles = (List<IdentityRole>)ViewData["roles"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+        <h2>Create a new account.</h2>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well">
+                        <div class="form-floating">
+                            <input asp-for="Input.FullName" class="form-control" autocomplete="fullName" aria-required="true" />
+                            <label asp-for="Input.FullName"></label>
+                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.CardId" class="form-control" autocomplete="cardId" aria-required="true" />
+                            <label asp-for="Input.CardId"></label>
+                            <span asp-validation-for="Input.CardId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <select asp-for="Input.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                            <label asp-for="Input.Gender"></label>
+                            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <select asp-for="Input.StateId" class="form-control" asp-items="@(new SelectList(@ViewBag.StatesList,"StateId","Name"))" id="stateId"></select>
+                            <label asp-for="Input.StateId"></label>
+                            <span asp-validation-for="Input.StateId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <select asp-for="Input.CityId" class="form-control" id="cities_id"></select>
+                            <label asp-for="Input.CityId"></label>
+                            <span asp-validation-for="Input.CityId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
+                            <label asp-for="Input.PhoneNumber"></label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well">
+                        <div class="form-floating">
+                            <input asp-for="Input.Address" class="form-control" autocomplete="address" aria-required="true" />
+                            <label asp-for="Input.Address"></label>
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Jop" class="form-control" autocomplete="jop" aria-required="true" />
+                            <label asp-for="Input.Jop"></label>
+                            <span asp-validation-for="Input.Jop" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.JopTitle" class="form-control" autocomplete="jopTitle" aria-required="true" />
+                            <label asp-for="Input.JopTitle"></label>
+                            <span asp-validation-for="Input.JopTitle" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                            <label asp-for="Input.Email"></label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <label asp-for="Input.Password"></label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                       @* <div class="form-floating">
+                            <label asp-for="Input.Name"></label>
+                            <select asp-for="Input.Name" class="form-control" asp-items="@(new SelectList(@ViewBag.roles,"Id","Name"))">
+                            </select>
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+
+
+
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </div>
+    </form>
+
+
+</div>
+
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+           
+            GetCityByStateId();
+        })
+        $("#stateId").change(function () {
+            GetCityByStateId();
+        });
+        var GetCityByStateId = function () {
+             $.ajax({
+                url: '@Url.Action("GetCityByStateId","Home",new{area = ""} )',
+                type: 'GET',
+                data: {
+                    stateId:$('#stateId').val(),
+                },
+                success: function (data) {
+                    $('#cities_id').find('option').remove()
+                    $(data).each(
+                        function (index, item) {
+                            $('#cities_id').append('<option value="' + item.cityId + '">' + item.name + '</option>')
+                        });
+                },
+                error: function () {
+                }
+               });
+
+        }
+</script>
+
+}

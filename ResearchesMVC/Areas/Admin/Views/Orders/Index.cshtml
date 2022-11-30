@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ResearchesMVC.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>كل الطلبات</h3>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.StudyTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Goal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToolsPdfUrl)
+            </th>
+            
+            @*<th>
+                @Html.DisplayNameFor(model => model.Term_Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Term)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.StudyTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Goal)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ToolsPdfUrl)*@
+                  <a asp-action="Download"
+			   asp-route-filename="@item.ToolsPdfUrl">
+				@item.ToolsPdfUrl </a>
+            </td>
+           
+           @* <td>
+                @Html.DisplayFor(modelItem => item.Term_Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+           
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                <a asp-area="Admin" asp-controller="Orders" asp-action="Edit"  asp-route-id="@item.Id">تعديل</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

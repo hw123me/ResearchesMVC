@@ -1,0 +1,142 @@
+﻿@model ResearchesMVC.Models.ViewModel.OrderViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="StatusId" />
+            <input type="hidden" asp-for="Active" />
+            <input type="hidden" asp-for="CreatedOn" />
+            <input type="hidden" asp-for="Notes" />
+            <input type="hidden" asp-for="ToolsPdfUrl" />
+
+             <div class="form-group">
+                <label asp-for="Uneviersity" class="control-label"></label>
+                <input asp-for="Uneviersity" class="form-control" />
+                <span asp-validation-for="Uneviersity" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="City_Univ" class="control-label"></label>
+                <input asp-for="City_Univ" class="form-control" />
+                <span asp-validation-for="City_Univ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="College" class="control-label"></label>
+                <input asp-for="College" class="form-control" />
+                <span asp-validation-for="College" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Section" class="control-label"></label>
+                <input asp-for="Section" class="form-control" />
+                <span asp-validation-for="Section" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialize" class="control-label"></label>
+                <input asp-for="Specialize" class="form-control" />
+                <span asp-validation-for="Specialize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudyTitle" class="control-label"></label>
+                <input asp-for="StudyTitle" class="form-control" />
+                <span asp-validation-for="StudyTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Goal" class="control-label"></label>
+                <select class="form-control" asp-for="Goal">
+                    <option value="ماجستير">ماجستير</option>
+                    <option value="دكتوراه">دكتوراه</option>
+                    <option value="بحث تخرج">بحث تخرج</option>
+                    <option value="متطلبات مادة دراسية">متطلبات مادة دراسية </option>
+                    <option value="دراسية ميدانية">دراسية ميدانية</option>
+                    <option value="تكليف من جهة">تكليف من جهة</option>
+                    <option value="ترقية">ترقية</option>
+                    <option value="غرض آخر">غرض آخر</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="School_Type" class="control-label"></label>
+                <select class="form-control" asp-for="School_Type">
+                    <option value="ابتدائية">ابتدائية</option>
+                    <option value="متوسطة">متوسطة</option>
+                    <option value="ثانوية">ثانوية</option>
+                    <option value="تعليم الكبار/الكبيرات">تعليم الكبار/الكبيرات</option>
+                    <option value="تعليم خاص/التربية الخاصة">تعليم خاص/التربية الخاصة</option>
+                    <option value="التعليم الأهلي">التعليم الأهلي</option>
+                    <option value="قطاع الإدارة">قطاع الإدارة</option>
+                    <option value="غير ذلك"> غير ذلك</option>
+                    
+                </select>
+            </div>
+             <div class="form-group">
+                <label asp-for="Term_Year" class="control-label"></label>
+                <input asp-for="Term_Year" class="form-control" />
+                <span asp-validation-for="Term_Year" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="Term" class="control-label"></label>
+                <select class="form-control" asp-for="Term">
+                    <option value="الفصل الأول">الفصل الأول</option>
+                    <option value="الفصل الثاني">الفصل الثاني</option>
+                    <option value="الفصل الثالث">الفصل الثالث</option>
+                   
+                </select>
+            </div>
+             <div class="form-group">
+                <label asp-for="ToolsPdf" class="control-label"></label>
+                <input  asp-for="ToolsPdf" class="form-control" />
+                <span asp-validation-for="ToolsPdf" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="ToolsPdfUrl" class="control-label"></label>
+                <input  asp-for="ToolsPdfUrl" class="form-control" />
+                <span asp-validation-for="ToolsPdfUrl" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label class="control-label">أدوات الدراسة</label><br />
+                @for (int i = 0; i < Model.StudyTools.Count; i++)
+                {
+                    <input asp-for="StudyTools[i].Value" type="hidden" class="form-control" />
+                    <input asp-for="StudyTools[i].Selected" type="checkbox" />
+
+                    @Model.StudyTools[i].Text <br />
+                }
+            </div>
+             <div class="form-group">
+                <label class="control-label">عينة الدراسة</label><br />
+                @for (int i = 0; i < Model.StudySamples.Count; i++)
+                {
+                    <input asp-for="StudySamples[i].Value" type="hidden" class="form-control" />
+                    <input asp-for="StudySamples[i].Selected" type="checkbox" />
+
+                    @Model.StudySamples[i].Text <br />
+                }
+            </div>
+           @*<div class="form-group">
+                <label asp-for="StatusId" class="control-label"></label>
+                <select asp-for="StatusId" class ="form-control" asp-items="ViewBag.StatusId" ></select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
